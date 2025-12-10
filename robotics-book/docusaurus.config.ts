@@ -78,7 +78,7 @@ const config: Config = {
           position: 'right',
         },
         {
-          href: 'https://github.com/Wasia93/docusaurus-robotics-book',
+          href: 'https://github.com/Mailakhan67/ai-robotics',
           label: 'GitHub',
           position: 'right',
         },
@@ -109,7 +109,7 @@ const config: Config = {
           items: [
             {
               label: 'GitHub Repository',
-              href: 'https://github.com/Wasia93/docusaurus-robotics-book',
+              href: 'https://github.com/Mailakhan67/ai-robotics',
             },
             {
               label: 'Discussion Forum',
