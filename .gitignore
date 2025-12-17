@@ -1,6 +1,0 @@
-.env
-.claude/settings.local.json
-nul
-node_modules/
-build/
-.DS_Store

@@ -1,7 +1,0 @@
-{
-  "enabledMcpjsonServers": [
-    "context7-docusaurus",
-    "github"
-  ],
-  "enableAllProjectMcpServers": true
-}
