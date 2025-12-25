@@ -119,6 +119,28 @@ export default function RAGChatbot({ apiUrl = chatbotConfig.BACKEND_URL }: Chatb
     }
   };
 
+  // Function to handle click outside the chat window to close it
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (isOpen &&
+          !event.target.closest(`.${styles.chatWindow}`) &&
+          !event.target.closest(`.${styles.chatButton}`)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
+
   return (
     <>
       {/* Floating Chat Button */}
@@ -126,6 +148,7 @@ export default function RAGChatbot({ apiUrl = chatbotConfig.BACKEND_URL }: Chatb
         className={styles.chatButton}
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Open chat"
+        title="Open chat"
       >
         {isOpen ? '✕' : <span className={styles.thickDots}>⋯</span>}
       </button>
@@ -155,6 +178,7 @@ export default function RAGChatbot({ apiUrl = chatbotConfig.BACKEND_URL }: Chatb
               <button
                 className={styles.clearSelection}
                 onClick={() => setSelectedText('')}
+                aria-label="Clear selection"
               >
                 ✕
               </button>
@@ -205,11 +229,13 @@ export default function RAGChatbot({ apiUrl = chatbotConfig.BACKEND_URL }: Chatb
               onKeyPress={handleKeyPress}
               rows={1}
               disabled={isLoading}
+              aria-label="Type your message"
             />
             <button
               className={styles.sendButton}
               onClick={sendMessage}
               disabled={!input.trim() || isLoading}
+              aria-label="Send message"
             >
               ➤
             </button>
