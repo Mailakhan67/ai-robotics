@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './styles.module.css';
+import { chatbotConfig } from '../../config/chatbot.config';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -12,7 +13,7 @@ interface ChatbotProps {
   apiUrl?: string;
 }
 
-export default function RAGChatbot({ apiUrl = 'https://docusaurus-robotics-book-production.up.railway.app' }: ChatbotProps) {
+export default function RAGChatbot({ apiUrl = chatbotConfig.BACKEND_URL }: ChatbotProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');

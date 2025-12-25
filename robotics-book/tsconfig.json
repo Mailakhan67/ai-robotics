@@ -1,4 +1,45 @@
+// {
+//   "extends": "@docusaurus/tsconfig",
+//   "exclude": [".docusaurus", "build"]
+// }
+
+
+
+
+// {
+//   "extends": "@docusaurus/tsconfig",
+//   "compilerOptions": {
+//     "jsx": "react-jsx",
+//     "strict": true,
+//     "esModuleInterop": true,
+//     "moduleResolution": "node",
+//     "forceConsistentCasingInFileNames": true,
+//     "skipLibCheck": true
+//   },
+//   "exclude": [".docusaurus", "build"]
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
 {
   "extends": "@docusaurus/tsconfig",
+  "compilerOptions": {
+    "jsx": "react-jsx",           // ← Ye zaruri hai
+    "strict": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
+  },
   "exclude": [".docusaurus", "build"]
 }

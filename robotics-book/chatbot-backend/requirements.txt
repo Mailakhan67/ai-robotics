@@ -12,3 +12,7 @@ python-multipart==0.0.12
 markdown==3.7
 beautifulsoup4==4.12.3
 tiktoken==0.8.0
+bcrypt==4.2.0
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+cryptography==43.0.1
