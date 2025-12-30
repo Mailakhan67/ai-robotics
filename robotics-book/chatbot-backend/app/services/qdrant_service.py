@@ -72,110 +72,40 @@ class QdrantService:
 
     def search(self, query_embedding: List[float], limit: int = 5) -> List[Dict]:
         """Search for similar documents"""
-        print(f"Available Qdrant client methods: {[m for m in dir(self.client) if 'search' in m.lower() or 'find' in m.lower() or 'query' in m.lower()]}")
 
         try:
-            if hasattr(self.client, 'query_points'):
-                print("Using query_points method")
-                # The query_points method returns a list of ScoredPoint objects
-                results = self.client.query_points(
-                    collection_name=self.collection_name,
-                    query=query_embedding,
-                    limit=limit
-                )
+            # Use the standard search method which should be available in all qdrant-client versions
+            hits = self.client.search(
+                collection_name=self.collection_name,
+                query_vector=query_embedding,
+                limit=limit
+            )
 
-                # Debug: Print the type and structure of results
-                print(f"Type of results: {type(results)}")
-                print(f"Has 'points' attribute: {hasattr(results, 'points')}")
+            result_list = []
+            for hit in hits:
+                # Extract payload information from the hit
+                payload = getattr(hit, 'payload', {})
 
-                # Handle the results based on the actual return type
-                # Qdrant's query_points returns a models.QueryResponse object
-                if hasattr(results, 'points'):
-                    # This is the newer format where results is a QueryResponse object
-                    hits = results.points
-                    print(f"Number of points returned: {len(hits)}")
-                elif isinstance(results, list):
-                    # This is if it directly returns a list of results
-                    hits = results
-                    print(f"Number of hits returned as list: {len(hits)}")
+                if isinstance(payload, dict):
+                    content = payload.get("content", "")
+                    title = payload.get("title", "")
+                    doc_id = payload.get("doc_id", "")
                 else:
-                    print(f"Unexpected result format: {type(results)}")
-                    print(f"Result content: {results}")
-                    return []
+                    # If payload is not a dict, try to access the attributes directly
+                    content = getattr(payload, 'content', '') if hasattr(payload, 'content') else ''
+                    title = getattr(payload, 'title', '') if hasattr(payload, 'title') else ''
+                    doc_id = getattr(payload, 'doc_id', '') if hasattr(payload, 'doc_id') else ''
 
-                result_list = []
-                for hit in hits:
-                    print(f"Hit type: {type(hit)}")
-                    if hasattr(hit, 'payload') and hit.payload:
-                        # Extract payload information from the hit
-                        payload = hit.payload
-                        if isinstance(payload, dict):
-                            content = payload.get("content", "")
-                            title = payload.get("title", "")
-                            doc_id = payload.get("doc_id", "")
-                        else:
-                            # If payload is not a dict, try to access the attributes directly
-                            content = getattr(payload, 'content', '') if hasattr(payload, 'content') else ''
-                            title = getattr(payload, 'title', '') if hasattr(payload, 'title') else ''
-                            doc_id = getattr(payload, 'doc_id', '') if hasattr(payload, 'doc_id') else ''
-                    else:
-                        # If hit doesn't have payload attribute or payload is None/empty
-                        content = getattr(hit, 'content', '') if hasattr(hit, 'content') else ''
-                        title = getattr(hit, 'title', '') if hasattr(hit, 'title') else ''
-                        doc_id = getattr(hit, 'doc_id', '') if hasattr(hit, 'doc_id') else ''
+                # Extract score from the hit
+                score = getattr(hit, 'score', 0.0) if hasattr(hit, 'score') else 0.0
 
-                    # Extract score from the hit
-                    score = getattr(hit, 'score', 0.0) if hasattr(hit, 'score') else 0.0
-
-                    result_list.append({
-                        "content": content,
-                        "title": title,
-                        "doc_id": doc_id,
-                        "score": score
-                    })
-                return result_list
-            else:
-                print("query_points method not available, falling back to search")
-
-                # Fallback to search method if query_points is not available
-                if hasattr(self.client, 'search'):
-                    hits = self.client.search(
-                        collection_name=self.collection_name,
-                        query_vector=query_embedding,
-                        limit=limit
-                    )
-
-                    result_list = []
-                    for hit in hits:
-                        if hasattr(hit, 'payload') and hit.payload:
-                            # Extract payload information from the hit
-                            payload = hit.payload
-                            if isinstance(payload, dict):
-                                content = payload.get("content", "")
-                                title = payload.get("title", "")
-                                doc_id = payload.get("doc_id", "")
-                            else:
-                                content = getattr(payload, 'content', '') if hasattr(payload, 'content') else ''
-                                title = getattr(payload, 'title', '') if hasattr(payload, 'title') else ''
-                                doc_id = getattr(payload, 'doc_id', '') if hasattr(payload, 'doc_id') else ''
-                        else:
-                            content = getattr(hit, 'content', '') if hasattr(hit, 'content') else ''
-                            title = getattr(hit, 'title', '') if hasattr(hit, 'title') else ''
-                            doc_id = getattr(hit, 'doc_id', '') if hasattr(hit, 'doc_id') else ''
-
-                        # Extract score from the hit
-                        score = getattr(hit, 'score', 0.0) if hasattr(hit, 'score') else 0.0
-
-                        result_list.append({
-                            "content": content,
-                            "title": title,
-                            "doc_id": doc_id,
-                            "score": score
-                        })
-                    return result_list
-                else:
-                    print("No search method available")
-                    return []
+                result_list.append({
+                    "content": content,
+                    "title": title,
+                    "doc_id": doc_id,
+                    "score": score
+                })
+            return result_list
         except Exception as e:
             print(f"Qdrant search failed: {e}")
             import traceback

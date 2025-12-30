@@ -194,14 +194,14 @@
 
 
 
-from app.services.gemini_service import GeminiService
+from app.services.openrouter_service import OpenRouterService
 from app.services.qdrant_service import QdrantService
 from typing import Dict, List, Tuple
 
 
 class RAGService:
     def __init__(self):
-        self.gemini_service = GeminiService()
+        self.openrouter_service = OpenRouterService()
         self.qdrant_service = QdrantService()
 
     def process_query(
@@ -215,8 +215,19 @@ class RAGService:
         Returns: (response, sources)
         """
 
-        # 1️⃣ Get embedding
-        query_embedding = self.gemini_service.get_embedding(user_message)
+        # 1️⃣ Get embedding (safe)
+        try:
+            query_embedding = self.openrouter_service.get_embedding(user_message)
+        except Exception as e:
+            print(f"❌ Embedding generation failed: {e}")
+            # If embedding fails, we can't do RAG, but we can still respond
+            # Return a response without RAG context
+            response = self.openrouter_service.chat_completion(
+                user_message=user_message,
+                context="",
+                selected_text=selected_text
+            )
+            return response, []
 
         # 2️⃣ Search documents (safe)
         try:
@@ -224,13 +235,14 @@ class RAGService:
                 query_embedding,
                 limit=top_k
             ) or []
-        except Exception:
+        except Exception as e:
+            print(f"❌ Qdrant search failed: {e}")
             # If Qdrant fails → continue without RAG
             relevant_docs = []
 
         # 3️⃣ Build context safely
         context_parts = []
-        
+
         for doc in relevant_docs:
             title = doc.get("title", "Document")
             content = doc.get("content", "")
@@ -241,7 +253,7 @@ class RAGService:
         context = "\n\n".join(context_parts)
 
         # 4️⃣ Ask LLM
-        response = self.gemini_service.chat_completion(
+        response = self.openrouter_service.chat_completion(
             user_message=user_message,
             context=context,
             selected_text=selected_text
@@ -285,7 +297,11 @@ class RAGService:
             for i, chunk in enumerate(chunks)
         ]
 
-        embeddings = self.gemini_service.get_embeddings(chunks)
+        try:
+            embeddings = self.openrouter_service.get_embeddings(chunks)
+        except Exception as e:
+            print(f"❌ Embedding generation failed during indexing: {e}")
+            raise
 
         num_indexed = self.qdrant_service.add_documents(
             embeddings,

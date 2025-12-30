@@ -15,7 +15,12 @@ class GeminiService:
             model=self.embedding_model,
             content=text
         )
-        return response["embedding"]
+        if isinstance(response, dict) and "embedding" in response:
+            return response["embedding"]
+        elif hasattr(response, '__getitem__'):
+            return response["embedding"]
+        else:
+            raise ValueError("Could not extract embedding from response")
 
     def get_embeddings(self, texts: List[str]) -> List[List[float]]:
         """Get embeddings for multiple texts"""
@@ -25,7 +30,12 @@ class GeminiService:
             content=texts
         )
         # The response structure is a dictionary with 'embedding' key containing a list of embeddings
-        return response["embedding"]
+        if isinstance(response, dict) and "embedding" in response:
+            return response["embedding"]
+        elif hasattr(response, '__getitem__'):
+            return response["embedding"]
+        else:
+            raise ValueError("Could not extract embeddings from response")
 
     def chat_completion(
         self,

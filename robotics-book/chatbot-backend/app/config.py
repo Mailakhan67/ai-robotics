@@ -134,11 +134,11 @@ from typing import List, Optional
 
 
 class Settings(BaseSettings):
-    # Gemini
-    gemini_api_key: str
-    gemini_model: str = "gemini-2.5-flash"
-    embedding_model: str = "models/text-embedding-004"
-    chat_model: str = "gemini-2.5-flash"
+    # OpenRouter
+    openrouter_api_key: str
+    openrouter_model: str = "mistralai/mistral-7b-instruct"  # Free model available on OpenRouter
+    embedding_model: str = "nomic-ai/nomic-embed-text-v1.5"  # Available embedding model on OpenRouter
+    chat_model: str = "mistralai/mistral-7b-instruct"  # Free model available on OpenRouter
 
     # Qdrant
     qdrant_url: str
@@ -156,7 +156,7 @@ class Settings(BaseSettings):
     # API
     api_host: str = "0.0.0.0"
     api_port: int = 8000
-    cors_origins: str = "http://localhost:3000,http://localhost:3001,https://ai-robotics-zuez.vercel.app,http://localhost:3002"
+    cors_origins: str = "http://localhost:3000,http://localhost:3001,https://ai-robotics-seven.vercel.app,http://localhost:3002"
 
     @property
     def cors_origins_list(self) -> List[str]:
