@@ -9,7 +9,7 @@ from app.auth.utils import verify_token
 
 
 security = HTTPBearer()
-
+ 
 
 def get_current_user(
     credentials: HTTPAuthorizationCredentials = Depends(security),

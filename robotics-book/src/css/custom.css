@@ -66,3 +66,167 @@
 ::-webkit-scrollbar-thumb:hover {
   background: var(--ifm-color-primary-dark);
 }
+
+/* Auth Navbar Dropdown Styles */
+.navbar__item {
+  pointer-events: auto !important;
+  z-index: 10000;
+}
+
+.navbar__item .dropdown {
+  position: relative;
+  display: inline-block;
+  pointer-events: auto !important;
+}
+
+.navbar__item .dropdown__toggle {
+  cursor: pointer !important;
+  border: none;
+  background-color: transparent;
+  color: var(--ifm-font-color-base);
+  padding: 0.25rem;
+  border-radius: 50%;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  position: relative;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto !important;
+  width: 40px;
+  height: 40px;
+}
+
+.navbar__item .dropdown__toggle:hover {
+  background-color: var(--ifm-color-emphasis-100);
+  transform: scale(1.1);
+}
+
+/* Circular Avatar with Email Initial */
+.user-avatar-initial {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--ifm-color-primary) 0%, var(--robotics-accent) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(14, 165, 233, 0.3);
+  transition: all 0.2s ease;
+  color: white;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.navbar__item .dropdown__toggle:hover .user-avatar-initial {
+  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.5);
+  transform: scale(1.05);
+}
+
+.user-email-text {
+  color: var(--ifm-font-color-base);
+  font-weight: 500;
+}
+
+.navbar__item .dropdown__menu {
+  position: absolute !important;
+  top: calc(100% + 0.5rem) !important;
+  right: 0 !important;
+  margin: 0 !important;
+  background-color: var(--ifm-background-surface-color) !important;
+  border: 1px solid var(--ifm-toc-border-color) !important;
+  border-radius: 0.5rem !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+  padding: 0.5rem 0 !important;
+  min-width: 12rem !important;
+  z-index: 99999 !important;
+  list-style: none !important;
+  pointer-events: auto !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.navbar__item .dropdown__menu li {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.navbar__item .dropdown__link {
+  display: block !important;
+  width: 100% !important;
+  padding: 0.625rem 1rem !important;
+  text-align: left !important;
+  background: transparent !important;
+  border: none !important;
+  color: var(--ifm-font-color-base) !important;
+  cursor: pointer !important;
+  font-size: 0.875rem !important;
+  transition: background-color 0.2s ease !important;
+  text-decoration: none !important;
+}
+
+.navbar__item .dropdown__link:hover {
+  background-color: var(--ifm-color-primary-lightest) !important;
+  color: var(--ifm-color-primary-darkest) !important;
+  text-decoration: none !important;
+}
+
+[data-theme='dark'] .navbar__item .dropdown__link:hover {
+  background-color: var(--ifm-color-primary-dark) !important;
+  color: white !important;
+}
+
+.navbar__item .dropdown__link--button {
+  width: 100% !important;
+  font-family: inherit !important;
+}
+
+/* Auth buttons styling */
+.auth-buttons {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.auth-buttons .button--outline {
+  border-color: #6b7280 !important;
+  color: #6b7280 !important;
+  background-color: transparent !important;
+}
+
+.auth-buttons .button--outline:hover {
+  background-color: #6b7280 !important;
+  color: white !important;
+  border-color: #6b7280 !important;
+}
+
+/* Social Login Buttons */
+.social-login-btn {
+  transition: all 0.2s ease !important;
+  font-weight: 500 !important;
+  font-size: 0.9rem !important;
+}
+
+.social-login-btn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.google-btn:hover {
+  background-color: #f8f9fa !important;
+}
+
+.microsoft-btn:hover {
+  background-color: #f8f9fa !important;
+}
+
+.github-btn:hover {
+  background-color: #1b1f23 !important;
+}

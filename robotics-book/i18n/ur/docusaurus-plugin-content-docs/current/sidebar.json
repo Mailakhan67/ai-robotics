@@ -1,0 +1,82 @@
+{
+  "tutorialSidebar": [
+    {
+      "type": "category",
+      "label": "🌟 تعارف (ہفتہ 1-2)",
+      "items": [
+        "foundations/intro-physical-ai",
+        "foundations/embodied-intelligence",
+        "foundations/humanoid-landscape",
+        "foundations/sensor-systems"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "🧠 ماڈیول 1: روبوٹک نروسسسٹم (ہفتہ 3-5)",
+      "items": [
+        "module1-ros2/ros2-overview",
+        "module1-ros2/nodes-topics-services",
+        "module1-ros2/python-ros2",
+        "module1-ros2/urdf-humanoids",
+        "module1-ros2/launch-files"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "🎮 ماڈیول 2: ڈیجیٹل ٹوئن (ہفتہ 6-7)",
+      "items": [
+        "module2-simulation/gazebo-setup",
+        "module2-simulation/physics-simulation",
+        "module2-simulation/unity-rendering",
+        "module2-simulation/sensor-simulation",
+        "module2-simulation/urdf-sdf"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "🚀 ماڈیول 3: ای آئی - روبوٹ براہین (ہفتہ 8-10)",
+      "items": [
+        "module3-isaac/isaac-sim",
+        "module3-isaac/synthetic-data",
+        "module3-isaac/isaac-ros",
+        "module3-isaac/vslam-navigation",
+        "module3-isaac/nav2-bipedal",
+        "module3-isaac/reinforcement-learning"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "🗣️ ماڈیول 4: وژن - لینگویج - ایکشن (ہفتہ 11-13)",
+      "items": [
+        "module4-vla/voice-to-action",
+        "module4-vla/llm-robotics",
+        "module4-vla/cognitive-planning",
+        "module4-vla/humanoid-kinematics",
+        "module4-vla/bipedal-locomotion",
+        "module4-vla/manipulation-grasping",
+        "module4-vla/hri-design",
+        "module4-vla/capstone-project"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "🛠️ ہارڈ ویئر اور انفراسٹرکچر",
+      "items": [
+        "hardware/workstation-requirements",
+        "hardware/edge-computing",
+        "hardware/robot-lab-options",
+        "hardware/cloud-vs-onpremise"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "📊 جائزے",
+      "items": [
+        "assessments/ros2-project",
+        "assessments/gazebo-implementation",
+        "assessments/isaac-perception",
+        "assessments/capstone"
+      ]
+    }
+  ]
+}

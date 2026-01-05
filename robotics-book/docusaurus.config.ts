@@ -181,7 +181,7 @@ const config: Config = {
 
   i18n: {
     defaultLocale: 'en',
-    locales: ['en'],
+    locales: ['en', 'ur'],
   },
 
   presets: [
@@ -219,6 +219,10 @@ const config: Config = {
       items: [
         {type: 'docSidebar', sidebarId: 'tutorialSidebar', position: 'left', label: 'Course'},
         {type: 'search', position: 'right'},
+        {
+          type: 'custom-navbar-language-switch',
+          position: 'right',
+        },
         // ✅ Replace hardcoded links with custom auth component
         {type: 'custom-auth', position: 'right'},
         {href: 'https://github.com/Mailakhan67/ai-robotics', label: 'GitHub', position: 'right'},

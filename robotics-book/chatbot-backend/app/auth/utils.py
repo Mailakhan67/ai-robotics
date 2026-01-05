@@ -65,32 +65,25 @@
 from datetime import datetime, timedelta
 from typing import Optional
 from jose import JWTError, jwt
-from passlib.context import CryptContext
+import bcrypt
 from fastapi import HTTPException, status
 from app.config import settings
-
-# Password hashing - using bcrypt with proper configuration
-# pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-pwd_context = CryptContext(schemes=["bcrypt_sha256"], deprecated="auto")
 
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     """
-    Verify the password against the hashed password.
-    Truncate to 72 characters to comply with bcrypt limitations.
+    Verify the password against the hashed password using bcrypt.
     """
-    # Truncate password to 72 characters to comply with bcrypt limitations
-    truncated_password = plain_password[:72] if len(plain_password) > 72 else plain_password
-    return pwd_context.verify(truncated_password, hashed_password)
+    return bcrypt.checkpw(plain_password.encode('utf-8'), hashed_password.encode('utf-8'))
+
 
 def get_password_hash(password: str) -> str:
     """
     Hash the password using bcrypt.
-    Truncate to 72 characters to comply with bcrypt limitations.
     """
-    # Truncate password to 72 characters to comply with bcrypt limitations
-    truncated_password = password[:72] if len(password) > 72 else password
-    return pwd_context.hash(truncated_password)
+    salt = bcrypt.gensalt()
+    hashed = bcrypt.hashpw(password.encode('utf-8'), salt)
+    return hashed.decode('utf-8')
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     """

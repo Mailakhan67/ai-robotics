@@ -153,6 +153,27 @@ class Settings(BaseSettings):
     algorithm: str = "HS256"
     access_token_expire_minutes: int = 30
 
+    # OAuth
+    google_client_id: Optional[str] = None
+    google_client_secret: Optional[str] = None
+    google_redirect_uri: str = "http://localhost:8000/auth/google/callback"
+
+    github_client_id: Optional[str] = None
+    github_id: Optional[str] = None  # Alternative name support
+    github_client_secret: Optional[str] = None
+    github_secret: Optional[str] = None  # Alternative name support
+    github_redirect_uri: str = "http://localhost:8000/auth/github/callback"
+
+    @property
+    def github_oauth_id(self) -> Optional[str]:
+        """Support both GITHUB_CLIENT_ID and GITHUB_ID"""
+        return self.github_client_id or self.github_id
+
+    @property
+    def github_oauth_secret(self) -> Optional[str]:
+        """Support both GITHUB_CLIENT_SECRET and GITHUB_SECRET"""
+        return self.github_client_secret or self.github_secret
+
     # API
     api_host: str = "0.0.0.0"
     api_port: int = 8000

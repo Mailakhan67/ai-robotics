@@ -136,7 +136,11 @@ const NavbarAuthComponent: React.FC<NavbarAuthComponentProps> = (props) => {
 
   const toggleDropdown = (e: React.MouseEvent) => {
     e.preventDefault();
-    setIsDropdownOpen(!isDropdownOpen);
+    e.stopPropagation();
+    const newState = !isDropdownOpen;
+    console.log('🔥 Button clicked! Current state:', isDropdownOpen, '→ New state:', newState);
+    setIsDropdownOpen(newState);
+    console.log('State updated to:', newState);
   };
 
   return (
@@ -144,34 +148,69 @@ const NavbarAuthComponent: React.FC<NavbarAuthComponentProps> = (props) => {
       {isAuthenticated && user ? (
         <div ref={dropdownRef} className="dropdown dropdown--right dropdown--end">
           <button
-            className="button button--secondary button--sm dropdown__toggle"
+            className="button button--secondary button--sm dropdown__toggle navbar-user-button"
             onClick={toggleDropdown}
             aria-expanded={isDropdownOpen}
             aria-haspopup="true"
+            title={user.email}
           >
-            {user.full_name || user.email}
+            <div className="user-avatar-initial">
+              {user.email.charAt(0).toUpperCase()}
+            </div>
           </button>
 
-          {isDropdownOpen && (
-            <ul className="dropdown__menu">
-              <li>
-                <button
-                  className="dropdown__link dropdown__link--button"
-                  onClick={handleProfileClick}
-                >
-                  Profile
-                </button>
-              </li>
-              <li>
-                <button
-                  className="dropdown__link dropdown__link--button"
-                  onClick={handleLogout}
-                >
-                  Logout
-                </button>
-              </li>
-            </ul>
-          )}
+          {(() => {
+            console.log('✅ Rendering dropdown menu. isDropdownOpen =', isDropdownOpen);
+            return isDropdownOpen ? (
+              <ul className="dropdown__menu" style={{ display: 'block' }}>
+                <li>
+                  <button
+                    className="dropdown__link dropdown__link--button"
+                    onClick={handleProfileClick}
+                  >
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      style={{ marginRight: '0.5rem', verticalAlign: 'middle' }}
+                    >
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    Profile
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className="dropdown__link dropdown__link--button"
+                    onClick={handleLogout}
+                  >
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      style={{ marginRight: '0.5rem', verticalAlign: 'middle' }}
+                    >
+                      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                      <polyline points="16 17 21 12 16 7"></polyline>
+                      <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            ) : null;
+          })()}
         </div>
       ) : (
         <div className="auth-buttons">

@@ -15,8 +15,8 @@ def get_user_by_id(db: Session, user_id: int):
 
 
 def create_user(db: Session, user: UserCreate):
-    # Hash the password
-    hashed_password = get_password_hash(user.password)
+    # Hash the password (empty string for OAuth users)
+    hashed_password = get_password_hash(user.password) if user.password else ""
 
     # Create the user object
     db_user = User(

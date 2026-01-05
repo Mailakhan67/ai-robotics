@@ -1,0 +1,42 @@
+{
+  "footer": {
+    "links": [
+      {
+        "title": "کورس کا مواد",
+        "items": [
+          {
+            "label": "تعارف",
+            "to": "/foundations/intro-physical-ai"
+          }
+        ]
+      },
+      {
+        "title": "وسائل",
+        "items": [
+          {
+            "label": "گِٹ ہب ریپوزیٹری",
+            "href": "https://github.com/Mailakhan67/ai-robotics"
+          },
+          {
+            "label": "بحث فورم",
+            "href": "https://github.com/Mailakhan67/ai-robotics/discussions"
+          }
+        ]
+      },
+      {
+        "title": "کے بارے میں",
+        "items": [
+          {
+            "label": "اس کورس کے بارے میں",
+            "to": "/"
+          },
+          {
+            "label": "لائسنس",
+            "href": "https://github.com/Mailakhan67/ai-robotics/blob/main/LICENSE"
+          }
+        ]
+      }
+    ],
+    "copyright": "فزکل ای آئی اور ہیومنوائڈ روبوٹکس کورس"
+  }
+}

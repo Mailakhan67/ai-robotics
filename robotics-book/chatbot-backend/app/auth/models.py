@@ -12,7 +12,7 @@ class User(Base):
     full_name = Column(String, nullable=False)
     hashed_password = Column(String, nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
-    updated_at = Column(DateTime(timezone=True), onupdate=func.now())
+    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
     
     # Profile fields
     software_background = Column(String, nullable=True)  # Beginner / Intermediate / Advanced

@@ -392,6 +392,95 @@ const SignupForm = () => {
                   {error}
                 </div>
               )}
+
+              {/* Social Login Buttons */}
+              <div className="social-login-section" style={{marginBottom: '2rem'}}>
+                <button
+                  type="button"
+                  className="button button--block social-login-btn google-btn"
+                  onClick={() => window.location.href = 'http://localhost:8000/auth/google/login'}
+                  style={{
+                    marginBottom: '0.75rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '0.5rem',
+                    backgroundColor: 'white',
+                    color: '#1f1f1f',
+                    border: '1px solid #dadce0',
+                    padding: '0.625rem 1rem'
+                  }}
+                >
+                  <svg width="18" height="18" viewBox="0 0 18 18">
+                    <path fill="#4285F4" d="M16.51 8H8.98v3h4.3c-.18 1-.74 1.48-1.6 2.04v2.01h2.6a7.8 7.8 0 002.38-5.88c0-.57-.05-.66-.15-1.18z"/>
+                    <path fill="#34A853" d="M8.98 17c2.16 0 3.97-.72 5.3-1.94l-2.6-2a4.8 4.8 0 01-7.18-2.54H1.83v2.07A8 8 0 008.98 17z"/>
+                    <path fill="#FBBC05" d="M4.5 10.52a4.8 4.8 0 010-3.04V5.41H1.83a8 8 0 000 7.18l2.67-2.07z"/>
+                    <path fill="#EA4335" d="M8.98 4.18c1.17 0 2.23.4 3.06 1.2l2.3-2.3A8 8 0 001.83 5.4L4.5 7.49a4.77 4.77 0 014.48-3.3z"/>
+                  </svg>
+                  Continue with Google
+                </button>
+
+                <button
+                  type="button"
+                  className="button button--block social-login-btn microsoft-btn"
+                  onClick={() => alert('Microsoft login coming soon!')}
+                  style={{
+                    marginBottom: '0.75rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '0.5rem',
+                    backgroundColor: 'white',
+                    color: '#1f1f1f',
+                    border: '1px solid #dadce0',
+                    padding: '0.625rem 1rem'
+                  }}
+                >
+                  <svg width="18" height="18" viewBox="0 0 23 23">
+                    <path fill="#f3f3f3" d="M0 0h23v23H0z"/>
+                    <path fill="#f35325" d="M1 1h10v10H1z"/>
+                    <path fill="#81bc06" d="M12 1h10v10H12z"/>
+                    <path fill="#05a6f0" d="M1 12h10v10H1z"/>
+                    <path fill="#ffba08" d="M12 12h10v10H12z"/>
+                  </svg>
+                  Continue with Microsoft
+                </button>
+
+                <button
+                  type="button"
+                  className="button button--block social-login-btn github-btn"
+                  onClick={() => window.location.href = 'http://localhost:8000/auth/github/login'}
+                  style={{
+                    marginBottom: '0.75rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '0.5rem',
+                    backgroundColor: '#24292e',
+                    color: 'white',
+                    border: 'none',
+                    padding: '0.625rem 1rem'
+                  }}
+                >
+                  <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                  </svg>
+                  Continue with GitHub
+                </button>
+
+                <div className="divider" style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  textAlign: 'center',
+                  margin: '1.5rem 0',
+                  color: '#6b7280'
+                }}>
+                  <div style={{flex: 1, borderBottom: '1px solid #e5e7eb'}}></div>
+                  <span style={{padding: '0 1rem', fontSize: '0.875rem'}}>OR</span>
+                  <div style={{flex: 1, borderBottom: '1px solid #e5e7eb'}}></div>
+                </div>
+              </div>
+
               <form onSubmit={handleSubmit}>
                 <div className="margin-bottom--lg" style={{marginBottom: '2rem'}}>
                   <label htmlFor="full_name" className="form-label" style={{display: 'block', marginBottom: '0.5rem'}}>Full Name</label>

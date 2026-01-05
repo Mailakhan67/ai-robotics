@@ -178,7 +178,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.config import settings
 from app.database import init_db
 from app.routers import chat, admin
+from app.routers.translation import router as translation_router
 from app.auth.routers import router as auth_router
+from app.auth.oauth import router as oauth_router
 
 # Import auth models to register them with SQLAlchemy Base before initializing DB
 import app.auth.models
@@ -216,7 +218,9 @@ except Exception as e:
 # Routers
 app.include_router(chat.router, prefix="/api", tags=["Chat"])
 app.include_router(admin.router, prefix="/api/admin", tags=["Admin"])
+app.include_router(translation_router, prefix="/api", tags=["Translation"])
 app.include_router(auth_router, prefix="/auth", tags=["Auth"])
+app.include_router(oauth_router, prefix="/auth", tags=["OAuth"])
 
 @app.get("/")
 async def root():
